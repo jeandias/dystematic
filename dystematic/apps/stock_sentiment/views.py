@@ -10,11 +10,6 @@ class CompanyViewSet(viewsets.ModelViewSet):
     serializer_class = CompanySerializer
 
 
-class PriceViewSet(viewsets.ModelViewSet):
-    queryset = Price.objects.all().order_by('-date')
-    serializer_class = PriceSerializer
-
-
 class RecommendationViewSet(viewsets.ModelViewSet):
     queryset = Recommendation.objects.all().order_by('-date')
     serializer_class = RecommendationSerializer
@@ -27,4 +22,4 @@ class PriceList(generics.ListAPIView):
         ticker = self.request.GET['ticker']
         start_date = self.request.GET['start_date']
         end_date = self.request.GET['end_date']
-        return Price.objects.filter(company__symbol=ticker, date__gte=start_date, date__lte=end_date)
+        return Price.objects.filter(company__symbol=ticker, date__range=(start_date, end_date))
