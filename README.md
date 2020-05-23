@@ -26,3 +26,9 @@ Recommendations
 ```sh
 $ http://localhost:28000/api/recommendations?ticker=NFLX&start_date=2020-01-01&end_date=2020-05-24
 ```
+## Built With
+* [yfinance](https://pypi.org/project/yfinance/) - Yahoo! Finance market data downloader
+* [djangorestframework](https://pypi.org/project/djangorestframework/) - Web APIs for Django, made easy
+* [psycopg2-binary](https://pypi.org/project/psycopg2-binary/) - Python-PostgreSQL Database Adapter
+* [celery](https://pypi.org/project/celery/) - Distributed Task Queue
+* [librabbitmq](https://pypi.org/project/librabbitmq/) - AMQP Client using the rabbitmq-c library
