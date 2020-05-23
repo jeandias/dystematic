@@ -19,7 +19,15 @@ class PriceList(generics.ListAPIView):
     serializer_class = PriceSerializer
 
     def get_queryset(self):
-        ticker = self.request.GET['ticker']
-        start_date = self.request.GET['start_date']
-        end_date = self.request.GET['end_date']
-        return Price.objects.filter(company__symbol=ticker, date__range=(start_date, end_date))
+        qs = Price.objects.filter()
+
+        ticker = self.request.GET.get('ticker', False)
+        if ticker:
+            qs = qs.filter(company__symbol=ticker)
+
+        start_date = self.request.GET.get('start_date', False)
+        end_date = self.request.GET.get('end_date', False)
+        if start_date and end_date:
+            qs = qs.filter(date__range=(start_date, end_date))
+
+        return qs
