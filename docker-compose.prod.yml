@@ -1,0 +1,20 @@
+version: "2.4"
+
+services:
+  django:
+    ports:
+      - "8000:8000"
+    environment:
+      - ENVIRONMENT=production
+
+  celery:
+    environment:
+      - ENVIRONMENT=production
+
+  postgres:
+    ports:
+      - "5432:5432"
+
+  rabbitmq:
+      ports:
+      - "15672:15672"

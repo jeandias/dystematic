@@ -1,0 +1,75 @@
+version: "2.4"
+
+services:
+  django:
+    init: true
+    image: django
+    build:
+      context: dystematic
+    command: django
+    ports:
+      - "28000:8000"
+    environment:
+      - ENVIRONMENT=local
+    depends_on:
+      - postgres
+      - rabbitmq
+    volumes:
+      - ./dystematic:/var/www/app
+
+  celery-beat:
+    init: true
+    image: django
+    command: celery
+    environment:
+      - ENVIRONMENT=local
+      - CELERY_QUEUE=beat
+    depends_on:
+      - django
+      - postgres
+      - rabbitmq
+    volumes:
+      - ./dystematic:/var/www/app
+
+  celery-worker:
+    init: true
+    image: django
+    command: celery
+    environment:
+      - ENVIRONMENT=local
+      - CELERY_QUEUE=celery
+      - CELERY_LOGLEVEL=DEBUG
+    depends_on:
+      - postgres
+      - rabbitmq
+      - django
+      - celery-beat
+    volumes:
+      - ./dystematic:/var/www/app
+
+  postgres:
+    init: true
+    image: postgres:12.3
+    environment:
+      POSTGRES_USER: dystematic
+      POSTGRES_PASSWORD: dystematic
+      POSTGRES_DB: dystematic
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "25432:5432"
+
+  rabbitmq:
+    hostname: rabbitmq
+    image: rabbitmq:3.8.3-management
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
+    volumes:
+      - rdata:/var/lib/rabbitmq
+    ports:
+      - "25672:15672"
+
+volumes:
+  pgdata:
+  rdata:
