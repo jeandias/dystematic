@@ -6,6 +6,15 @@ from .models import Company, Price, Recommendation
 @shared_task
 def fetch_stock_data():
     tickers = ['FB', 'AAPL', 'NFLX', 'GOOG']
+    switcher = {
+        'Buy': 1,
+        'Neutral': 0,
+        'Strong Buy': 1.5,
+        'Sell': -1,
+        'Strong Sell': -1.5,
+        'Positive': 1,
+        'Negative': -1,
+    }
 
     Company.objects.all().delete()
     for t in tickers:
@@ -43,5 +52,6 @@ def fetch_stock_data():
                 date=index.date(),
                 recommendation=row['To Grade'],
                 firm=row['Firm'],
+                scalar=switcher.get(row['To Grade'], 0)
             )
             recommendation.save()

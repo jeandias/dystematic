@@ -5,10 +5,10 @@ from apps.stock_sentiment import views
 
 router = routers.DefaultRouter()
 router.register(r'companies', views.CompanyViewSet)
-router.register(r'recommendations', views.RecommendationViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/', include(router.urls)),
-    path('api/prices/', views.PriceList.as_view())
+    path('api/prices/', views.PriceList.as_view()),
+    path('api/recommendations', views.RecommendationList.as_view())
 ]

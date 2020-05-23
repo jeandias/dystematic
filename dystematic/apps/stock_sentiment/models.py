@@ -27,16 +27,4 @@ class Recommendation(models.Model):
     date = models.DateField(null=False)
     recommendation = models.CharField(max_length=50, null=False)
     firm = models.CharField(max_length=50, null=False)
-
-    @property
-    def scalar(self):
-        switcher = {
-            'Buy': 1,
-            'Neutral': 0,
-            'Strong Buy': 1.5,
-            'Sell': -1,
-            'Strong Sell': -1.5,
-            'Positive': 1,
-            'Negative': -1,
-        }
-        return switcher.get(self.recommendation, 0)
+    scalar = models.FloatField(null=False)

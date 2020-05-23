@@ -12,10 +12,10 @@ class CompanySerializer(serializers.HyperlinkedModelSerializer):
 class PriceSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Price
-        fields = ['company', 'date', 'open', 'high', 'low', 'close', 'volume']
+        fields = ['date', 'open', 'high', 'low', 'close', 'volume']
 
 
 class RecommendationSerializer(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Recommendation
-        fields = ['company', 'date', 'recommendation', 'scalar', 'firm']
+        fields = ['date', 'scalar']
