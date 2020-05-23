@@ -32,6 +32,7 @@ def fetch_stock_data():
         )
         company.save()
 
+        prices_list = []
         prices = yf.download(company.symbol)
         for index, row in prices.iterrows():
             price = Price(
@@ -43,8 +44,10 @@ def fetch_stock_data():
                 close=row['Close'],
                 volume=row['Volume'],
             )
-            price.save()
+            prices_list.append(price)
+        Price.objects.bulk_create(prices_list)
 
+        recommendation_list = []
         recommendations = ticker.recommendations
         for index, row in recommendations.iterrows():
             recommendation = Recommendation(
@@ -54,4 +57,5 @@ def fetch_stock_data():
                 firm=row['Firm'],
                 scalar=switcher.get(row['To Grade'], 0)
             )
-            recommendation.save()
+            recommendation_list.append(recommendation)
+        Recommendation.objects.bulk_create(recommendation_list)

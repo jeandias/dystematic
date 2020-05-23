@@ -32,3 +32,4 @@ $ http://localhost:28000/api/recommendations?ticker=NFLX&start_date=2020-01-01&e
 * [psycopg2-binary](https://pypi.org/project/psycopg2-binary/) - Python-PostgreSQL Database Adapter
 * [celery](https://pypi.org/project/celery/) - Distributed Task Queue
 * [librabbitmq](https://pypi.org/project/librabbitmq/) - AMQP Client using the rabbitmq-c library
+* [docker](https://docs.docker.com/) - Docker is an open platform for developing, shipping, and running applications

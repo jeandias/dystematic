@@ -15,7 +15,7 @@ class PriceList(generics.ListAPIView):
     serializer_class = PriceSerializer
 
     def get_queryset(self):
-        qs = Price.objects.filter()
+        qs = Price.objects.all()
 
         ticker = self.request.GET.get('ticker', False)
         if ticker:
@@ -33,7 +33,7 @@ class RecommendationList(generics.ListAPIView):
     serializer_class = RecommendationSerializer
 
     def get_queryset(self):
-        qs = Recommendation.objects.values('date').filter()
+        qs = Recommendation.objects.values('date').all()
 
         ticker = self.request.GET.get('ticker', False)
         if ticker:
