@@ -33,3 +33,4 @@ $ http://localhost:28000/api/recommendations?ticker=NFLX&start_date=2020-01-01&e
 * [celery](https://pypi.org/project/celery/) - Distributed Task Queue
 * [librabbitmq](https://pypi.org/project/librabbitmq/) - AMQP Client using the rabbitmq-c library
 * [docker](https://docs.docker.com/) - Docker is an open platform for developing, shipping, and running applications
+* [flower](https://pypi.org/project/flower/) - Flower is a web based tool for monitoring and administrating Celery clusters
