@@ -26,6 +26,10 @@ Recommendations
 ```sh
 $ http://localhost:28000/api/recommendations?ticker=NFLX&start_date=2020-01-01&end_date=2020-05-24
 ```
+**Flower**: Monitoring and administrating Celery
+```sh
+$ http://localhost:25555
+```
 ## Built With
 * [yfinance](https://pypi.org/project/yfinance/) - Yahoo! Finance market data downloader
 * [djangorestframework](https://pypi.org/project/djangorestframework/) - Web APIs for Django, made easy
