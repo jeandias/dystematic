@@ -23,7 +23,7 @@ WORKDIR ${APP_FOLDER}
 
 RUN : "---------- install container extras ----------" \
     && apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
         vim \
         jq \
         curl \
@@ -34,7 +34,7 @@ RUN : "---------- install container extras ----------" \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=python-cache /root/wheels /root/wheels
-RUN WHEELS=$(cd /root/wheels; ls -1 *.whl | awk -F - '{ gsub("_", "-", $1); print $1 }' | uniq) \
+RUN WHEELS=$(cd /root/wheels; ls -1 -- *.whl | awk -F - '{ gsub("_", "-", $1); print $1 }' | uniq) \
     && pip install --no-index --find-links=/root/wheels $WHEELS
 
 COPY rootfs /
