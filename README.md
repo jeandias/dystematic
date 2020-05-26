@@ -1,4 +1,5 @@
 # Dystematic
+[![CodeFactor](https://www.codefactor.io/repository/github/jeandias/dystematic/badge/celery-flower)](https://www.codefactor.io/repository/github/jeandias/dystematic/overview/celery-flower)
 ### Description
 REST api backed by a PostgreSQL instance to expose historical market data from Yahoo! finance.
 ## Installation
@@ -38,3 +39,4 @@ $ http://localhost:25555
 * [librabbitmq](https://pypi.org/project/librabbitmq/) - AMQP Client using the rabbitmq-c library
 * [docker](https://docs.docker.com/) - Docker is an open platform for developing, shipping, and running applications
 * [flower](https://pypi.org/project/flower/) - Flower is a web based tool for monitoring and administrating Celery clusters
+* [django-environ](https://pypi.org/project/django-environ/) - Django-environ allows you to utilize 12factor inspired environment variables to configure your Django application

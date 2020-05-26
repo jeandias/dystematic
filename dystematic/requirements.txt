@@ -7,3 +7,4 @@ yfinance==0.1.54
 lxml==4.5.1
 ipdb==0.13.2
 djangorestframework==3.11.0
+django-environ==0.4.5
