@@ -1,4 +1,4 @@
-from django.db.models import Avg
+from django.db.models import Func, F, Q, Value, Count
 from rest_framework import viewsets
 from rest_framework import generics
 
@@ -33,7 +33,7 @@ class RecommendationList(generics.ListAPIView):
     serializer_class = RecommendationSerializer
 
     def get_queryset(self):
-        qs = Recommendation.objects.values('date').all()
+        qs = Recommendation.objects.all()
 
         ticker = self.request.GET.get('ticker', False)
         if ticker:
@@ -44,4 +44,13 @@ class RecommendationList(generics.ListAPIView):
         if start_date and end_date:
             qs = qs.filter(date__range=(start_date, end_date))
 
-        return qs.annotate(scalar=Avg('scalar'))
+        return qs.annotate(month=Func(F('date'), Value('YYYY-MM'), function='TO_CHAR')).values('month').annotate(
+            buy=Count('recommendation', filter=Q(recommendation='Buy')),
+            neutral=Count('recommendation', filter=Q(recommendation='Neutral')),
+            strong_buy=Count('recommendation', filter=Q(recommendation='Strong Buy')),
+            sell=Count('recommendation', filter=Q(recommendation='Sell')),
+            strong_sell=Count('recommendation', filter=Q(recommendation='Strong Sell')),
+            positive=Count('recommendation', filter=Q(recommendation='Positive')),
+            negative=Count('recommendation', filter=Q(recommendation='Negative'))).order_by(
+            Func(F('date'), Value('YYYY-MM'), function='TO_CHAR')).values(
+            'month', 'buy', 'neutral', 'strong_buy', 'sell', 'strong_sell', 'positive', 'negative')
