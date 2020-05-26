@@ -1,5 +1,5 @@
 # Dystematic
-[![CodeFactor](https://www.codefactor.io/repository/github/jeandias/dystematic/badge/celery-flower)](https://www.codefactor.io/repository/github/jeandias/dystematic/overview/celery-flower)
+[![CodeFactor](https://www.codefactor.io/repository/github/jeandias/dystematic/badge)](https://www.codefactor.io/repository/github/jeandias/dystematic)
 ### Description
 REST api backed by a PostgreSQL instance to expose historical market data from Yahoo! finance.
 ## Installation
