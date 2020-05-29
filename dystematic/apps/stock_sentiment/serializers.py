@@ -16,6 +16,15 @@ class PriceSerializer(serializers.HyperlinkedModelSerializer):
 
 
 class RecommendationSerializer(serializers.HyperlinkedModelSerializer):
+    month = serializers.DateField()
+    buy = serializers.IntegerField()
+    neutral = serializers.IntegerField()
+    strong_buy = serializers.IntegerField()
+    sell = serializers.IntegerField()
+    strong_sell = serializers.IntegerField()
+    positive = serializers.IntegerField()
+    negative = serializers.IntegerField()
+
     class Meta:
         model = Recommendation
-        fields = ['date', 'scalar']
+        fields = ['month', 'buy', 'neutral', 'strong_buy', 'sell', 'strong_sell', 'positive', 'negative']
